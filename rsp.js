@@ -1,11 +1,15 @@
+/* Returns a random element from the array, wich will be the cpu selection */
+
 function computerPlay() {
     let hand = ['rock', 'scissors', 'papper'];
     return hand[Math.floor(Math.random() * hand.length)];
 }
 
 /* 
-    If computerPlay and player play are the same --> Tie!
-    If not, check if cpu wins, if not player wins
+    Determines if the cpu won the round
+    Takes two arguments:
+     -cpu: cpu selection
+     -player: player selection
 */
 
 function cpuWin(cpu, player) {
@@ -14,6 +18,8 @@ function cpuWin(cpu, player) {
         cpu == 'papper' && player == 'rock'
     );
 }
+
+/* Plays one round of the game and print the result */
 
 function playRound(computerSelection, playerSelection) {
     let cpu = computerSelection;
@@ -33,9 +39,14 @@ function playRound(computerSelection, playerSelection) {
     }
 }
 
+
+/*  Check if the player input is a valid option */
+
 function selectionIsOk(playerSelection) {
     return (playerSelection == 'rock' || playerSelection == 'scissors' || playerSelection == 'papper')
 }
+
+/* Play the gamem 5 rounds in total, and display the final result */
 
 function game() {
     let playerScore = 0;
