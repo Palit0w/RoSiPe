@@ -1,12 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Scissors and Papper</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Scissors and Papper</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body style="background-color: hsl(195, 3%, 25%);">
-    
+
+<body>
+  <header class="header">
+    <h1 class="title">Rock, Scissors and Papper</h1>
+  </header>
+
+  <div class="scoreboard">
+    <h2 class="score-title">Score</h2>
+    <div class="score">
+      <div class="scores">
+        <p class="points" id="player-score">0</p>
+        <span class="who">PLAYER</span>
+      </div>
+      <div class="scores">
+        <p class="points" id="cpu-score">0</p>
+        <span class="who">COMPUTER</span>
+      </div>
+    </div>
+    <div class="msg">Choose your weapon</div>
+  </div>
+
+  <div class="container">
+    <div class="btn" id="rock"><img src="./img/rock.png" alt="rock"></div>
+    <div class="btn" id="scissors"><img src="/img/scissors.png" alt="scissors"></div>
+    <div class="btn" id="papper"><img src="/img/paper.png" alt="papper"></div>
+  </div>
+
 </body>
 <script src="rsp.js"></script>
+
 </html>

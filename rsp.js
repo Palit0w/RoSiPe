@@ -19,56 +19,48 @@ function cpuWin(cpu, player) {
     );
 }
 
+function gameOver(playerScore, cpuScore) {
+    if (playerScore > cpuScore) {
+        alert(`You Win! Press F5 to play again!`)
+    }
+    else{ 
+        alert(`You Lost! Press F5 to play again!`)
+    }
+}
+
 /* Plays one round of the game and print the result */
 
-function playRound(computerSelection, playerSelection) {
-    let cpu = computerSelection;
-    let player = playerSelection.toLowerCase();
+function playRound(e) {
+    const cpu = computerPlay();
+    const player = e.currentTarget.id;
+    const msg = document.querySelector('.msg');
+    const playerScore = document.getElementById('player-score');
+    const cpuScore = document.getElementById('cpu-score');
+
+    if (playerScore.innerText == 5 || cpuScore.innerText == 5) {
+        gameOver(playerScore.innerText, cpuScore.innerText);
+        return;
+    }
+
     if (cpu === player) {
-        console.log('Tie!');
-        return 1;
+
+        msg.textContent = 'Tie!'
     }
     else if (cpuWin(cpu, player)) {
-        console.log(`You Lose! ${cpu[0].toUpperCase()}${cpu.slice(1)} beats ${player[0].toUpperCase()}${player.slice(1)}`);
-
-        return 2;
+        
+        cpuScore.innerText = +cpuScore.innerText +1; 
+        msg.textContent = `You Lose! ${cpu[0].toUpperCase()}${cpu.slice(1)} beats ${player[0].toUpperCase()}${player.slice(1)}`;
     }
     else {
-        console.log(`You Win! ${player[0].toUpperCase()}${player.slice(1)} beats ${cpu[0].toUpperCase()}${cpu.slice(1)}`);
-        return 3;
+        
+        playerScore.innerText = +playerScore.innerText + 1;
+        msg.textContent = `You Win! ${player[0].toUpperCase()}${player.slice(1)} beats ${cpu[0].toUpperCase()}${cpu.slice(1)}`;
     }
 }
 
 
 /*  Check if the player input is a valid option */
 
-function selectionIsOk(playerSelection) {
-    return (playerSelection == 'rock' || playerSelection == 'scissors' || playerSelection == 'papper')
-}
 
-/* Play the gamem 5 rounds in total, and display the final result */
-
-function game() {
-    let playerScore = 0;
-    let cpuScore = 0;
-    for (let i = 0; i < 5; i++) {
-        let computerSelection = computerPlay();
-
-        let playerSelection = prompt('Rock, Scissors or Papper? Choose your weapon!').toLowerCase();
-        while (!selectionIsOk(playerSelection)) {
-            playerSelection = prompt(`There is no ${playerSelection} here! Rock, Scissors or Papper? Choose your weapon!`).toLocaleLowerCase();
-        }
-
-        let result = playRound(computerSelection, playerSelection);
-        switch (result) {
-            case 2:
-                cpuScore++;
-                break;
-            case 3:
-                playerScore++;
-            default:
-                break;
-        }
-    }
-    console.log(`The final result is Player: ${playerScore} - Computer ${cpuScore}`);
-}
+const buttons = document.querySelectorAll('.btn');
+buttons.forEach(btn => btn.addEventListener('click', playRound));
